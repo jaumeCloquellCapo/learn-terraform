@@ -1,0 +1,16 @@
+#+TITLE: terraform-oci
+
+* What it is
+  A Terraform configuration for compute resources on the Free Tier of Oracle Cloud Infrastructure.
+
+  https://www.oracle.com/es/cloud/free/
+  
+** Thet it do
+
+Deploys maximum resources on Oracle Cloud Infrastructure (OCI) Free Tier:
+
+- 1 Compartment
+- 1 Virtual Cloud Network with Internet Gateway, Subnet, and Security Group
+- 2 AMD Micro instances (Ubuntu): 1 OCPU, 1 GiB RAM, 50 GiB storage each
+- 1 AMD Flex instance (Oracle Linux): 4 OCPUs, 24 GiB RAM, 100 GiB storage
+- 3 Volume backup policies
