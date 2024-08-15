@@ -1,0 +1,29 @@
+# Stage 1: Build the binary
+FROM golang:1.23-alpine AS builder
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the Go mod and sum files
+COPY go.mod go.sum ./
+
+# Download necessary dependencies
+RUN go mod download
+
+# Copy the rest of the application code
+COPY . .
+
+# Build the application binary from the cmd/main.go file
+RUN go build -o my-app ./cmd/main.go
+
+# Stage 2: Create a minimal image
+FROM alpine:3.18
+
+# Copy the compiled binary from the build stage
+COPY --from=builder /app/my-app /my-app
+
+# Expose port 8000
+EXPOSE 8080
+
+# Default command to run the application
+CMD ["/my-app"]
